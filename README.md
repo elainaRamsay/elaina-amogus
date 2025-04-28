@@ -1,2 +1,2 @@
 # elaina-amogus
-Simple animation of among us in processing
+Simple animation of among us character in processing
