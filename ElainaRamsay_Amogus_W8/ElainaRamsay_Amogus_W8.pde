@@ -114,7 +114,7 @@ void draw(){
   //rect(bodyCentreX-bodyWidth/2,bodyCentreY-torsoHeight,90,200); 
   //rect(bodyCentreX+10,bodyCentreY-70,90,200);
   //rect(bodyCentreX-10,bodyCentreY-50,20,110); ///background colours
-  
+  stroke(2);
   rect(bodyCentreX-bodyWidth/2,bodyCentreY-torsoHeight/2,bodyWidth,torsoHeight-10);
   rect(bodyCentreX-bodyWidth/2,bodyCentreY+10,legWidth,legLength);
   rect(bodyCentreX+bodyWidth/2,bodyCentreY+10,-legWidth,legLength);
