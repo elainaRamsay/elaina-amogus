@@ -1,0 +1,13 @@
+bodyCentreX = 200
+bodyCentreY = 170
+
+hitbox is from bodyCentreX-150, bodyCentreY-120 to bodyCentreX+100, bodyCentreY+120
+
+define bodyWidth, bodyHeight vars
+use them lol
+
+bodyWidth included the backpack
+uninclude it? maybe
+
+refactor the whole fakcing thing after figuring out each value
+maybe go OOP for it, should be less garbly
