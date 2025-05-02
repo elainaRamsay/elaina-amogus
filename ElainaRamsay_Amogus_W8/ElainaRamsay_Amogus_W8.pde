@@ -54,56 +54,46 @@ void draw(){
   arc(bodyCentreX+55,bodyCentreY+130,90,25,0,PI); // draw feet
   
   arc(bodyCentreX,bodyCentreY+(torsoHeight/2)-10,20,5,0,PI); // draw crotch (legs middle)
-
-  color bodyColourRed = #E30206; 
-  color bodyColourBlue = #1D3CE9; 
-  color bodyColourDGreen = #1B913E; 
-  color bodyColourPink = #FF63D4; 
-  color bodyColourOrange = #FF8D1C;
-  color bodyColourYellow = #FFFF67;
-  color bodyColourBlack = #4A565E; 
-  color bodyColourWhite = #E9F7FF; 
-  color bodyColourPurple = #783DD2;
-  color bodyColourBrown = #80582D; 
-  color bodyColourCyan = #44FFF7; 
-  color bodyColourLime = #5BFE4B; 
+ 
+  color[] bodyColours = {#E30206, #1D3CE9, #1B913E, #FF63D4, #FF8D1C, #FFFF67,
+  #4A565E, #E9F7FF, #783DD2, #80582D, #44FFF7, #5BFE4B}; 
   color visorColour = #62CCFF;
   
   if (bodyColourPos == 0){
-    currentBodyColour = bodyColourRed;
+    currentBodyColour = bodyColours[0];
   }  
   else if (bodyColourPos == 1){
-    currentBodyColour = bodyColourBlue;
+    currentBodyColour = bodyColours[1];
   }  
   else if (bodyColourPos == 2){
-    currentBodyColour = bodyColourDGreen;
+    currentBodyColour = bodyColours[2];
   }
   else if (bodyColourPos == 3){
-    currentBodyColour = bodyColourPink;
+    currentBodyColour = bodyColours[3];
   }
   else if (bodyColourPos == 4){
-    currentBodyColour = bodyColourOrange;
+    currentBodyColour = bodyColours[4];
   }
   else if (bodyColourPos == 5){
-    currentBodyColour = bodyColourYellow;
+    currentBodyColour = bodyColours[5];
   }
   else if (bodyColourPos == 6){
-    currentBodyColour = bodyColourBlack;
+    currentBodyColour = bodyColours[6];
   }
   else if (bodyColourPos == 7){
-    currentBodyColour = bodyColourWhite;
+    currentBodyColour = bodyColours[7];
   }
   else if (bodyColourPos == 8){
-    currentBodyColour = bodyColourPurple;
+    currentBodyColour = bodyColours[8];
   }
   else if (bodyColourPos == 9){
-    currentBodyColour = bodyColourBrown;
+    currentBodyColour = bodyColours[9];
   }
   else if (bodyColourPos == 10){
-    currentBodyColour = bodyColourCyan;
+    currentBodyColour = bodyColours[10];
   }
   else if (bodyColourPos == 11){
-    currentBodyColour = bodyColourLime;
+    currentBodyColour = bodyColours[11];
   }
   
   stroke(currentBodyColour);
@@ -114,7 +104,7 @@ void draw(){
   //rect(bodyCentreX-bodyWidth/2,bodyCentreY-torsoHeight,90,200); 
   //rect(bodyCentreX+10,bodyCentreY-70,90,200);
   //rect(bodyCentreX-10,bodyCentreY-50,20,110); ///background colours
-  stroke(2);
+  
   rect(bodyCentreX-bodyWidth/2,bodyCentreY-torsoHeight/2,bodyWidth,torsoHeight-10);
   rect(bodyCentreX-bodyWidth/2,bodyCentreY+10,legWidth,legLength);
   rect(bodyCentreX+bodyWidth/2,bodyCentreY+10,-legWidth,legLength);
