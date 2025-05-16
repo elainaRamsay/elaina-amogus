@@ -1,11 +1,27 @@
-Amogus mogus;
+Amogus alice;
 
 void setup(){
   size(800,800);
-  mogus = new Amogus(width/3,height/4,200);
+ 
+  alice = new Amogus(width/2, height/2, 0);  
 }
 
 void draw(){
   background(255);
-  mogus.display();
+  alice.display();
+  alice.bounceAround();
+  
+  
+}
+
+void mouseDragged(){
+  alice.reposition(mouseX, mouseY);
+}
+
+void keyPressed(){
+  if (key == 'e' || key == 'E'){
+    alice.colourIncrease();
+  } else if (key == 'q' || key == 'Q'){
+    alice.colourDecrease();
+  }
 }
