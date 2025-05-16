@@ -11,7 +11,6 @@ void draw(){
   alice.display();
   alice.bounceAround();
   
-  
 }
 
 void mouseDragged(){

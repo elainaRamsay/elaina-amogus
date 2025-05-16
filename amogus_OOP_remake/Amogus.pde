@@ -32,13 +32,12 @@ class Amogus {
     headWidth = 200;
     headHeight = 130;
     legWidth = 90;
-    ;
     legLength = bodyHeight/2;
 
     dx = random(-3, 3);
     dy = random(-3, 3);
 
-    while (dx < 1 && dx > -1) {
+    while (dx < 1 && dx > -1) { // ensure initial dx and dy are above 1 (not too slow)
       dx = random(-3, 3);
     }
     while (dy < 1 && dy > -1) {
@@ -72,7 +71,7 @@ class Amogus {
   }
 
   void reposition(float requestedX, float requestedY){
-    if (requestedX < 150){
+    if (requestedX < 150){  // ensure that none of the amogus is clipping outside the window boundary
       centreX = 150;
     } else if (requestedX > width-100){
       centreX = width-100;
@@ -90,7 +89,7 @@ class Amogus {
     centreX += dx;
     centreY += dy;
     
-    if (centreX <= 150 || centreX >= width-100){
+    if (centreX <= 150 || centreX >= width-100){ // bounce back when touching a wall
       dx = -dx;
     }
     if (centreY <= 120 || centreY >= height-120){
@@ -98,36 +97,12 @@ class Amogus {
     }
   }
 
-  private void colourSelect() {
-    if (colourPos == 0) {
-      bodyColour = colours[0];
-    } else if (colourPos == 1) {
-      bodyColour = colours[1];
-    } else if (colourPos == 2) {
-      bodyColour = colours[2];
-    } else if (colourPos == 3) {
-      bodyColour = colours[3];
-    } else if (colourPos == 4) {
-      bodyColour = colours[4];
-    } else if (colourPos == 5) {
-      bodyColour = colours[5];
-    } else if (colourPos == 6) {
-      bodyColour = colours[6];
-    } else if (colourPos == 7) {
-      bodyColour = colours[7];
-    } else if (colourPos == 8) {
-      bodyColour = colours[8];
-    } else if (colourPos == 9) {
-      bodyColour = colours[9];
-    } else if (colourPos == 10) {
-      bodyColour = colours[10];
-    } else if (colourPos == 11) {
-      bodyColour = colours[11];
-    }
+  private void colourSelect() { 
+    bodyColour = colours[colourPos];
   }
 
   void colourIncrease() {
-    if (colourPos == 11) {
+    if (colourPos == colours.length-1) {
       colourPos = 0;
     } else {
       colourPos++;
@@ -136,7 +111,7 @@ class Amogus {
 
   void colourDecrease() {
     if (colourPos == 0) {
-      colourPos = 11;
+      colourPos = colours.length-1;
     } else {
       colourPos--;
     }
