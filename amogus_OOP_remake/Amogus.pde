@@ -2,6 +2,9 @@ class Amogus {
   float centreX;
   float centreY;
 
+  PVector position;
+  PVector velocity;
+  
   int bodyWidth;
   int bagWidth;
   int bodyHeight;
@@ -23,6 +26,7 @@ class Amogus {
   Amogus(float initX, float initY, int initColour) {
     centreX = initX;
     centreY = initY;
+    
     colourPos = initColour;
 
     bodyWidth = 200;
@@ -43,6 +47,9 @@ class Amogus {
     while (dy < 1 && dy > -1) {
       dy = random(-3, 3);
     }
+        
+    position = new PVector(initX, initY); // unused elsewhere
+    velocity = new PVector(dx, dy);
   }
 
   void display(){
@@ -95,6 +102,10 @@ class Amogus {
     if (centreY <= 120 || centreY >= height-120){
       dy = -dy;
     }
+  }
+
+  void hopAround(){
+    
   }
 
   private void colourSelect() { 
