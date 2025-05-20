@@ -16,6 +16,7 @@ class Amogus {
 
   float dx;
   float dy;
+  float gravity;
 
   int colourPos;
   color bodyColour;
@@ -40,6 +41,7 @@ class Amogus {
 
     dx = random(-3, 3);
     dy = random(-3, 3);
+    gravity = 9.8;
 
     while (dx < 1 && dx > -1) { // ensure initial dx and dy are above 1 (not too slow)
       dx = random(-3, 3);
@@ -105,13 +107,23 @@ class Amogus {
   }
 
   void hopAround(){
-    
+    if (centreY + bodyHeight/2 > height) {
+      
+    }  
   }
 
   private void colourSelect() { 
     bodyColour = colours[colourPos];
   }
-
+  
+  void setColour(int i){
+    if (i == 10 || i == 11){
+      colourPos = i;
+    } else {
+      colourPos = i - 48;
+    }
+  }
+  
   void colourIncrease() {
     if (colourPos == colours.length-1) {
       colourPos = 0;
