@@ -16,19 +16,23 @@ class Amogus {
 
   float dx;
   float dy;
-  float gravity;
+  float ay;
 
   int colourPos;
   color bodyColour;
   color[] colours = {#E30206, #1D3CE9, #1B913E, #FF63D4, #FF8D1C, #FFFF67,
     #4A565E, #E9F7FF, #783DD2, #80582D, #44FFF7, #5BFE4B};
   color visorColour = #62CCFF;
+  
+  boolean isSelected;
+  
 
   Amogus(float initX, float initY, int initColour) {
     centreX = initX;
     centreY = initY;
     
     colourPos = initColour;
+    isSelected = false;
 
     bodyWidth = 200;
     bagWidth = 50;
@@ -41,7 +45,7 @@ class Amogus {
 
     dx = random(-3, 3);
     dy = random(-3, 3);
-    gravity = 9.8;
+    ay = 0.15;
 
     while (dx < 1 && dx > -1) { // ensure initial dx and dy are above 1 (not too slow)
       dx = random(-3, 3);
@@ -76,6 +80,10 @@ class Amogus {
     fill(visorColour);
     ellipse(centreX+30, centreY-60, 100, 70); // visor
     
+    if (isSelected){
+      select();
+    }
+    
     fill(bodyColour);
   }
 
@@ -107,9 +115,30 @@ class Amogus {
   }
 
   void hopAround(){
-    if (centreY + bodyHeight/2 > height) {
+
+    centreX += dx; // move sideways
+    dy += ay;
+    centreY += dy;
+    
+    if (centreY + bodyHeight/2 > height && dy > 0){ // if feet go below bottom of window and dy is positive
+      if (dy > 10){
+        dy = 10;
+      }
       
-    }  
+      dy = -dy - ay; // reverse dy, subtract acceleration
+    }
+    if (centreY < bodyHeight/2 && dy < 0){ // if centreY is less than half the body height, and dy is negative (if head touches the ceiling and dy is negative)
+      if (dy < -10) {
+        dy = -10;
+      }
+      
+      dy = -dy - ay;
+    }
+    
+    if (centreX <= 150 || centreX >= width-100){ // bounce back when touching a wall
+      dx = -dx;
+    }
+    
   }
 
   private void colourSelect() { 
@@ -138,5 +167,28 @@ class Amogus {
     } else {
       colourPos--;
     }
+  }
+  
+  void clickedOn(float testX, float testY){
+    if (dist(testX, testY, centreX, centreY) <= headWidth/2){
+      isSelected = true;
+    }
+    else {
+      isSelected = false;
+    }
+  }
+  
+  boolean checkIfSelected(){
+    if (isSelected){
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+  
+  private void select(){
+    fill(0);
+    circle(centreX, centreY, 30);
   }
 }

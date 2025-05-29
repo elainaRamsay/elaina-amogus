@@ -11,7 +11,7 @@ void setup(){
 void draw(){
   background(255);
   alice.display();
-  alice.bounceAround();
+  alice.hopAround();
   
 }
 
@@ -19,11 +19,19 @@ void mouseDragged(){
   alice.reposition(mouseX, mouseY);
 }
 
+void mouseClicked(){
+  alice.clickedOn(mouseX, mouseY);
+}
+
 void keyPressed(){
   if (key == 'e' || key == 'E'){
-    alice.colourIncrease();
+    if (alice.checkIfSelected() == true){
+      alice.colourIncrease();
+    }
   } else if (key == 'q' || key == 'Q'){
-    alice.colourDecrease();
+    if (alice.checkIfSelected() == true){
+      alice.colourDecrease();
+    }
   }
   
   if (isValidColour(key) == 0){
