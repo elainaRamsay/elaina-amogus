@@ -2,9 +2,6 @@ class Amogus {
   float centreX;
   float centreY;
 
-  PVector position;
-  PVector velocity;
-  
   int bodyWidth;
   int bagWidth;
   int bodyHeight;
@@ -26,7 +23,6 @@ class Amogus {
   
   boolean isSelected;
   
-
   Amogus(float initX, float initY, int initColour) {
     centreX = initX;
     centreY = initY;
@@ -53,13 +49,14 @@ class Amogus {
     while (dy < 1 && dy > -1) {
       dy = random(-3, 3);
     }
-        
-    position = new PVector(initX, initY); // unused elsewhere
-    velocity = new PVector(dx, dy);
   }
 
   void display(){
     noStroke();
+    
+    colourSelect();
+    fill(bodyColour);
+    
     arc(centreX, centreY-torsoHeight/2, headWidth, headHeight, PI, TWO_PI); // top of head
     
     arc(centreX-55, centreY+130, 90, 25, 0, PI); // feet
@@ -67,9 +64,7 @@ class Amogus {
     
     arc(centreX, centreY+(torsoHeight/2)-10, 20, 5, 0, PI); // crotch
     
-    colourSelect();
     stroke(bodyColour);
-    fill(bodyColour);
     
     rect(centreX-(bodyWidth/2)-bagWidth, centreY-torsoHeight/2, bagWidth, 130); // bag
     
@@ -83,22 +78,22 @@ class Amogus {
     if (isSelected){
       select();
     }
-    
-    fill(bodyColour);
   }
 
   void reposition(float requestedX, float requestedY){
-    if (requestedX < 150){  // ensure that none of the amogus is clipping outside the window boundary
-      centreX = 150;
-    } else if (requestedX > width-100){
-      centreX = width-100;
-    } else if (requestedY < 120){
-      centreY = 120;
-    } else if (requestedY > height-120){
-      centreY = height-120;
-    } else {
-      centreX = requestedX;
-      centreY = requestedY;
+    if (isSelected){
+      if (requestedX < 150){  // ensure that none of the amogus is clipping outside the window boundary
+        centreX = 150;
+      } else if (requestedX > width-100){
+        centreX = width-100;
+      } else if (requestedY < 120){
+        centreY = 120;
+      } else if (requestedY > height-120){
+        centreY = height-120;
+      } else {
+        centreX = requestedX;
+        centreY = requestedY;
+      }
     }
   }
   
@@ -170,7 +165,7 @@ class Amogus {
   }
   
   void clickedOn(float testX, float testY){
-    if (dist(testX, testY, centreX, centreY) <= headWidth/2){
+    if (dist(testX, testY, centreX, centreY) <= bodyHeight/2){
       isSelected = true;
     }
     else {

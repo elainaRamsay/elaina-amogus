@@ -1,69 +1,90 @@
-Amogus alice;
-
-void setup(){
-  size(1400,800);
+/*
+This program is an animation of Among Us characters that hop around the screen
+ Click on an amogus to select it. While an amogus is selected, Q and E will change its colour
+ Click on empty space to unselect all amogii
  
-  alice = new Amogus(width/2, height/2, 0);
-  
-  
+ Pressing any key from '1' to '=' (the top row of a QWERTY keyboard) will set all the amogii colours to the same in one fell swoop
+ 
+ Clicking and dragging on a selected amogus will allow you to reposition it
+ */
+
+//Amogus alice;
+
+Amogus[] amogii = new Amogus[4];
+
+void setup() {
+  size(1400, 800);
+
+  for (int i = 0; i < amogii.length; i++) {
+    amogii[i] = new Amogus(width/2, height/2, int(random(0, 12)));
+  }
 }
 
-void draw(){
+void draw() {
   background(255);
-  alice.display();
-  alice.hopAround();
-  
+
+  for (int i = 0; i < amogii.length; i++) {
+    amogii[i].display();
+    amogii[i].hopAround();
+  }
 }
 
-void mouseDragged(){
-  alice.reposition(mouseX, mouseY);
+void mouseDragged() {
+  for (int i = 0; i < amogii.length; i++) {
+    amogii[i].reposition(mouseX, mouseY);
+  }
 }
 
-void mouseClicked(){
-  alice.clickedOn(mouseX, mouseY);
+void mouseClicked() {
+  for (int i = 0; i < amogii.length; i++) {
+    amogii[i].clickedOn(mouseX, mouseY);
+  }
 }
 
-void keyPressed(){
-  if (key == 'e' || key == 'E'){
-    if (alice.checkIfSelected() == true){
-      alice.colourIncrease();
+void keyPressed() {
+
+  if (key == 'e' || key == 'E') {
+    for (int i = 0; i < amogii.length; i++) {
+      if (amogii[i].checkIfSelected() == true) {
+        amogii[i].colourIncrease();
+      }
     }
-  } else if (key == 'q' || key == 'Q'){
-    if (alice.checkIfSelected() == true){
-      alice.colourDecrease();
+  } else if (key == 'q' || key == 'Q') {
+    for (int i = 1; i < amogii.length; i++) {
+      if (amogii[i].checkIfSelected() == true) {
+        amogii[i].colourDecrease();
+      }
     }
   }
-  
-  if (isValidColour(key) == 0){
+
+  if (isValidColour(key) == 0) {
     // set all obj colours
-    alice.setColour(key);
+    for (int i = 0; i < amogii.length; i++) {
+      amogii[i].setColour(key);
+    }
+  } else if (isValidColour(key) == 1) {
+    for (int i = 0; i < amogii.length; i++){
+      amogii[i].setColour(keyToInt(key));
+    }
   }
-  else if (isValidColour(key) == 1){
-    alice.setColour(keyToInt(key));
-  }
-  
 }
 
-int isValidColour(char input){
-  if (input == '1' || input == '2' || input == '3' || input == '4' || input == '5' || input == '6' || input == '7' || input == '8' || input == '9' || input == '0'){
+int isValidColour(char input) {
+  if (input == '1' || input == '2' || input == '3' || input == '4' || input == '5' || input == '6' || input == '7' || input == '8' || input == '9' || input == '0') {
     return 0;
-  } 
-  else if (input == '-' || input == '_' || input == '=' || input == '+'){
+  } else if (input == '-' || input == '_' || input == '=' || input == '+') {
     return 1;
-  } 
-  else {
+  } else {
     return 2;
   }
 }
 
-int keyToInt(char input){
-  if (input == '-' || input == '_'){
+int keyToInt(char input) {
+  if (input == '-' || input == '_') {
     return 10;
-  }
-  else if (input == '=' || input == '+'){
+  } else if (input == '=' || input == '+') {
     return 11;
-  }
-  else {
+  } else {
     return 0;
   }
 }
