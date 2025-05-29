@@ -4,6 +4,7 @@ This program is an animation of Among Us characters that hop around the screen
  Click on empty space to unselect all amogii
  
  Pressing any key from '1' to '=' (the top row of a QWERTY keyboard) will set all the amogii colours to the same in one fell swoop
+ Pressing the R key will randomise all the amogii colours
  
  Clicking and dragging on a selected amogus will allow you to reposition it
  */
@@ -14,9 +15,11 @@ Amogus[] amogii = new Amogus[4];
 
 void setup() {
   size(1400, 800);
-
+  
+  float spacing = 300;
+  
   for (int i = 0; i < amogii.length; i++) {
-    amogii[i] = new Amogus(width/2, height/2, int(random(0, 12)));
+    amogii[i] = new Amogus(100 + spacing * i, height/2, int(random(0, 12)));
   }
 }
 
@@ -50,21 +53,26 @@ void keyPressed() {
       }
     }
   } else if (key == 'q' || key == 'Q') {
-    for (int i = 1; i < amogii.length; i++) {
+    for (int i = 0; i < amogii.length; i++) {
       if (amogii[i].checkIfSelected() == true) {
         amogii[i].colourDecrease();
       }
     }
+  } else if (key == 'r' || key == 'R'){
+    for (int i = 0; i < amogii.length; i++){
+      amogii[i].setColourIndex(int(random(12)));
+    }
   }
+  
 
   if (isValidColour(key) == 0) {
     // set all obj colours
     for (int i = 0; i < amogii.length; i++) {
-      amogii[i].setColour(key);
+      amogii[i].setColourKey(key);
     }
   } else if (isValidColour(key) == 1) {
     for (int i = 0; i < amogii.length; i++){
-      amogii[i].setColour(keyToInt(key));
+      amogii[i].setColourKey(keyToInt(key));
     }
   }
 }

@@ -79,6 +79,38 @@ class Amogus {
       select();
     }
   }
+  
+  private void colourSelect() { 
+    bodyColour = colours[colourPos];
+  }
+  
+  void setColourKey(int i){
+    if (i == 10 || i == 11){
+      colourPos = i;
+    } else {
+      colourPos = i - 48; // below 10 the returned value will be an ASCII index, not a valid array index
+    }
+  }
+  
+  void setColourIndex(int i){
+    colourPos = i;
+  }
+  
+  void colourIncrease() {
+    if (colourPos == colours.length-1) {
+      colourPos = 0;
+    } else {
+      colourPos++;
+    }
+  }
+
+  void colourDecrease() {
+    if (colourPos == 0) {
+      colourPos = colours.length-1;
+    } else {
+      colourPos--;
+    }
+  }
 
   void reposition(float requestedX, float requestedY){
     if (isSelected){
@@ -97,7 +129,7 @@ class Amogus {
     }
   }
   
-  void bounceAround(){
+  void bounceAround(){ // previously used DVD player screensaver type movement
     centreX += dx;
     centreY += dy;
     
@@ -110,7 +142,6 @@ class Amogus {
   }
 
   void hopAround(){
-
     centreX += dx; // move sideways
     dy += ay;
     centreY += dy;
@@ -118,6 +149,9 @@ class Amogus {
     if (centreY + bodyHeight/2 > height && dy > 0){ // if feet go below bottom of window and dy is positive
       if (dy > 10){
         dy = 10;
+      }
+      else if (dy <= 2){
+        dy = 5;
       }
       
       dy = -dy - ay; // reverse dy, subtract acceleration
@@ -130,37 +164,8 @@ class Amogus {
       dy = -dy - ay;
     }
     
-    if (centreX <= 150 || centreX >= width-100){ // bounce back when touching a wall
+    if (centreX <= 150 && dx < 0 || centreX >= width-100 && dx > 0){ // bounce back when touching a wall
       dx = -dx;
-    }
-    
-  }
-
-  private void colourSelect() { 
-    bodyColour = colours[colourPos];
-  }
-  
-  void setColour(int i){
-    if (i == 10 || i == 11){
-      colourPos = i;
-    } else {
-      colourPos = i - 48;
-    }
-  }
-  
-  void colourIncrease() {
-    if (colourPos == colours.length-1) {
-      colourPos = 0;
-    } else {
-      colourPos++;
-    }
-  }
-
-  void colourDecrease() {
-    if (colourPos == 0) {
-      colourPos = colours.length-1;
-    } else {
-      colourPos--;
     }
   }
   
